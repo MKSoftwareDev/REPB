@@ -74,11 +74,18 @@ function saveUser(req,res){
 function login(req,res){
 	var params = req.body;
 	//var email=params.email;
-	console.log(params);
-	var surname=params.surname;
+	//console.log(params);
+	var surname = params.surname;
 	var password = params.password;
+	var empresa = params.empresa;
+	var sucursal = params.sucursal;
+	var fechatrabajo = params.fechatrabajo;
 
-	User.findOne({surname:surname.toLowerCase()},(err,user)=>{
+	//if (empresa == ""){
+	//	console.log(params);
+	//}
+
+	User.findOne({surname:surname,},(err,user)=>{
 		if(err){
 			res.status(500).send({message:'Error al comprobar el usuario'})
 			console.log('Error al comprobar el usuario');
@@ -96,7 +103,24 @@ function login(req,res){
 								token: jwt.createToken(user)
 							});
 						}else{
-							res.status(200).send({user});
+							//Verificamos si tiene acceso a la empresa
+							console.log(user.accesoEmpresa);
+							console.log(empresa);
+							console.log(user.accesoSucursal);
+							console.log(sucursal);
+							if (user.accesoEmpresa.indexOf(empresa) === -1) {
+								res.status(404).send({message:'No tiene acceso a la empresa ' + empresa });
+								console.log('No tiene acceso empresa ' + empresa);
+							} else if (user.accesoEmpresa.indexOf(empresa) > -1) {
+								//Verificamos si tiene acceso a la sucursal
+								if (user.accesoSucursal.indexOf(sucursal) === -1) {
+									res.status(404).send({message:'No tiene acceso a la sucursal ' + sucursal });
+									console.log('No tiene acceso sucursal ' + sucursal);
+								} else if (user.accesoSucursal.indexOf(sucursal) > -1) {
+									res.status(200).send({user});							
+									console.log('shalom');
+								}
+							}
 						}
 					}else{
 						res.status(404).send({message:'El password es incorrecto'});
@@ -110,8 +134,10 @@ function login(req,res){
 			}
 		}
 	})
-
 }
+
+
+
 
 
 	//para probar

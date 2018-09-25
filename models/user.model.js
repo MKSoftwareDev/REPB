@@ -36,6 +36,8 @@ var userSchema = new mongoose.Schema({
 	},
 	grupo: {type: String, default: 'Developers'},
 	departamento: {type: String, default: 'Ventas'},
+	accesoEmpresa: [{type: String}],
+	accesoSucursal: [{type: String}]
 
 });
 var User = mongoose.model('users', userSchema);

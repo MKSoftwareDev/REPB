@@ -13,7 +13,7 @@ function cfg_lst (req, res){
                 res.status(404).send({message:'No se encontro el registro'});
             } else {
                 res.status(200).send({cfg});
-                console.log(cfg);               
+                //console.log(cfg);               
             }
         }
     });
