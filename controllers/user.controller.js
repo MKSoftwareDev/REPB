@@ -19,11 +19,10 @@ function pruebas(req,res){
 
 function saveUser(req,res){
 	//crear el objeto del usuario
-	var user = new User();
-	
+	var user = new User();	
 	//recoger parametros peticion
 	var params=req.body;
-
+	
 	if (params.password && params.nombre && params.surname && params.email){
 		user.surname=params.surname;
 		user.nombre=params.nombre;
@@ -72,6 +71,9 @@ function saveUser(req,res){
 }
 
 function login(req,res){
+	console.log(req.body);
+	console.log(params);
+	
 	var params = req.body;
 	//var email=params.email;
 	//console.log(params);
@@ -104,10 +106,10 @@ function login(req,res){
 							});
 						}else{
 							//Verificamos si tiene acceso a la empresa
-							console.log(user.accesoEmpresa);
-							console.log(empresa);
-							console.log(user.accesoSucursal);
-							console.log(sucursal);
+							//console.log(user.accesoEmpresa);
+							//console.log(empresa);
+							//console.log(user.accesoSucursal);
+							//console.log(sucursal);
 							if (user.accesoEmpresa.indexOf(empresa) === -1) {
 								res.status(404).send({message:'No tiene acceso a la empresa ' + empresa });
 								console.log('No tiene acceso empresa ' + empresa);
@@ -135,19 +137,10 @@ function login(req,res){
 		}
 	})
 }
-
-
-
-
-
 	//para probar
 	//res.status(200).send({
 	//	message:'Metodo de registro'
 	//});
-
-
-
-
 module.exports= {
 	pruebas,
 	saveUser,

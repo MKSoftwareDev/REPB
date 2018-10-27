@@ -10,6 +10,7 @@ var bill_routes=require('./routes/bill.routes');
 var empresa_routes=require('./routes/empresa.routes');
 var sucursal_routes=require('./routes/sucursal.routes');
 var cfg_routes=require('./routes/cfg.routes');
+var people_routes=require('./routes/people.routes');
 
 
 
@@ -45,6 +46,7 @@ app.use(mkappuse,bill_routes);
 app.use(mkappuse,empresa_routes);
 app.use(mkappuse,sucursal_routes);
 app.use(mkappuse,cfg_routes);
+app.use(mkappuse,people_routes);
 
 
 module.exports = app;

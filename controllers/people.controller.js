@@ -1,28 +1,34 @@
 'use strict'
 //models
-var Empresa = require('../models/empresa.model');
+var People = require('../models/people.model');
 var Mensaje = require('../models/mensaje.model');
 var mklog = require ('../module/l/log.module');
 
 
-//insertar
-function empresa_new_post(req,res){
-  
-    //crear el objeto de la empresa
-    var empresa = new Empresa();
-    //recoger parametros de peticion
+//INSERTA un documento en la coleccion; Verb http POST
+function people_new(req,res){  
+    var peoplenueva = new People();
     var params=req.body;
     var mkIdioma="esp";
-    console.log(req.body);
-    ;
-    //
-     if (params.clave && params.nombre){
-         //asignamos las variables
-         empresa.clave=params.clave;
-         empresa.nombre=params.nombre;
-         empresa.rfc=params.rfc;
-         console.log(empresa);
-         empresa.save((err,number) => {
+
+    if (params.clave && params.nombre){
+        peoplenueva.clave = params.clave ,
+        peoplenueva.nombre = params.nombre,
+        peoplenueva.apellido = params.apellido,
+        peoplenueva.sapellido = params.sapellido,
+        peoplenueva.RFC = params.RFC,
+        peoplenueva.genero = params.genero,
+        peoplenueva.esPEP = params.esPEP,
+        peoplenueva.domicilio = params.domicilio ,  
+        peoplenueva.telefono = params.telefono,
+        peoplenueva.correo = params.correo,
+        peoplenueva.nacionalidad = params.nacionalidad,
+        peoplenueva.fechaCreacion = params.fechaCreacion, 
+        peoplenueva.fechaactualizacion = params.fechaactualizacion,
+        peoplenueva.estatus = params.estatus,
+        peoplenueva._usuario = params._usuario
+
+        peoplenueva.save((err,number) => {
              if (err){
                  console.log(err);
                  res.status(500).send({message:err.message});
@@ -47,20 +53,17 @@ function empresa_new_post(req,res){
          });               
      }
 }
-
-function empresa_mksd(req,res){
-    var params=req.body;
-
-    console.log(req.body);
-    console.log(params);
-
-    res.status(200).send({message:'Funciona'});               
-
+//EDITA un documento en la coleccion; Verb http PUT
+function people_edit(req,res){
+    res.status(200).send({message:'EDITA un documento en la coleccion; Verb http PUT'}); 
 }
-
-
-function empresa_lst (req,res){
-    Empresa.find({},(err,empresa)=>{
+//BORRA un documento en la coleccion; Verb http DELETE
+function people_delete(req,res){
+    res.status(200).send({message:'BORRA un documento en la coleccion; Verb http DELETE'});   
+}
+//ENLISTA TODOS los documentos de la coleccion; verb http GET
+function people_all (req,res){
+    people.find({},(err,empresa)=>{
         if (err) {
             res.status(500).send({message:err.message});
         } else {
@@ -72,22 +75,18 @@ function empresa_lst (req,res){
         }
     });
 }
-
-
-
-
-// detalle
-function empresa_det (req,res){
-    var empresaid=req.params.id;
-    if (empresaid) {
-        Empresa.find({_id:empresaid},(err,empresa)=>{
+//ENLISTA UN documento de la coleccion; verb http GET
+function people_one (req,res){
+    var peopleid=req.params.id;
+    if (peopleid) {
+        Empresa.find({_id:peopleid},(err,people)=>{
             if (err){
                 res.status(500).send({messege:err.messege});
             } else {
-                if (!empresa){
+                if (!people){
                     res.status(404).send({messge:'No se encontro el registro'});
                 } else {
-                    res.status(200).send({empresa})
+                    res.status(200).send({people})
                 }
             }
         });
@@ -95,11 +94,10 @@ function empresa_det (req,res){
         res.status(404).send({message:'No se encontro la llave del documento'});
     }
 }
-
 module.exports={
-    empresa_new_post,
-    empresa_det,
-    empresa_lst,
-    empresa_mksd
-
+    people_new,
+    people_edit,
+    people_delete,
+    people_all,
+    people_one
 };
