@@ -1,6 +1,6 @@
 'use strict'
 //Models
-var Bill=require('../models/bill.model');
+var Bill=require('../../models/b/bill.model');
 
 //	Nuevo
 function bill_new_post (req,res){	

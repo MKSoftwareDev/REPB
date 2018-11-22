@@ -1,8 +1,9 @@
 'use strict'
+
 //models
-var People = require('../models/people.model');
-var Mensaje = require('../models/mensaje.model');
-var mklog = require ('../module/l/log.module');
+var People = require('../../models/p/people.model');
+var Mensaje = require('../../models/m/mensaje.model');
+var mklog = require ('../../module/l/log.module');
 
 
 //INSERTA un documento en la coleccion; Verb http POST

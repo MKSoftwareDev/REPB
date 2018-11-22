@@ -1,20 +1,17 @@
 'use strict'
 //models
-var Empresa = require('../models/empresa.model');
-var Mensaje = require('../models/mensaje.model');
-var mklog = require ('../module/l/log.module');
-
-
-//insertar
-function empresa_new_post(req,res){
-  
+var Empresa = require('../../models/e/empresa.model');
+var Mensaje = require('../../models/m/mensaje.model');
+var mklog = require ('../../module/l/log.module');
+// Insertar
+function empresa_new(req,res){  
     //crear el objeto de la empresa
     var empresa = new Empresa();
     //recoger parametros de peticion
     var params=req.body;
     var mkIdioma="esp";
     console.log(req.body);
-    ;
+    console.log(params);
     //
      if (params.clave && params.nombre){
          //asignamos las variables
@@ -47,19 +44,48 @@ function empresa_new_post(req,res){
          });               
      }
 }
-
-function empresa_mksd(req,res){
+//  Actualizar
+function empresa_edit (req,res){
+	var empresaid=req.params.id;
+    console.log(empresaid);
+      
+    //crear el objeto de la empresa
+    var empresa = new Empresa();
+    //recoger parametros de peticion
     var params=req.body;
-
+    var mkIdioma="esp";
     console.log(req.body);
-    console.log(params);
+	if (empresaid){
+		//recoger parametros peticion
+		var params=req.body;
+		console.log(params);
+		if ( params.clave && params.nombre ){
 
-    res.status(200).send({message:'Funciona'});               
+			Empresa.findByIdAndUpdate(empresaid,
+				                  {$set : {clave:params.clave,
+									  nombre:params.nombre,
+									  rfc:params.rfc
+									}},{ upsert:true, new : true }, (err,empresaUpt) => {
+				if (err) {
+					res.status(500).send({message:err.message});
+				}else{
+					if (!empresaUpt) {
+						res.status(404).send({message:'Error al actualizar la empresa'});
+					}else{
+						res.status(200).send({empresa:empresaUpt});
+					}
+				}
+			});
+		}else{
+			res.status(404).send({message:'Introduce correctamente los datos'});
+		}
 
+	}else{
+		res.status(404).send({message:'No se encontro el ID en la Rutaaaaaaaaaaaaa'});
+	}
 }
-
-
-function empresa_lst (req,res){
+//  Lista
+function empresa_list (req,res){
     Empresa.find({},(err,empresa)=>{
         if (err) {
             res.status(500).send({message:err.message});
@@ -73,11 +99,29 @@ function empresa_lst (req,res){
     });
 }
 
+//	Borrar
+function empresa_delete (req,res){
+	var empresaId=req.params.id;
+	if (!empresaId) {	
+		Empresa.findByIdAndRemove(empresaId,(err,empresa)=>{
+			if(err){
+				res.status(500).send({message:err.message});
+			}else{
+				if(!empresa){
+					res.status(404).send({message:'No se encontro el registro'});
 
+				}else{
+					res.status(200).send({empresa})
+				}
+			}
+		});
+	}else{
+		res.status(404).send({message:'No se encontro la llave del documento'});
+	}
+}
 
-
-// detalle
-function empresa_det (req,res){
+//  Detalle
+function empresa_uno (req,res){
     var empresaid=req.params.id;
     if (empresaid) {
         Empresa.find({_id:empresaid},(err,empresa)=>{
@@ -96,10 +140,11 @@ function empresa_det (req,res){
     }
 }
 
-module.exports={
-    empresa_new_post,
-    empresa_det,
-    empresa_lst,
-    empresa_mksd
 
+module.exports={
+    empresa_new,
+    empresa_edit,
+    empresa_list,
+    empresa_delete,
+    empresa_uno
 };

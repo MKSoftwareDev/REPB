@@ -1,6 +1,6 @@
 'use strict'
 //models
-var Cfg = require ('../models/cfg.model');
+var Cfg = require ('../../models/c/cfg.model');
 
 
 //lista

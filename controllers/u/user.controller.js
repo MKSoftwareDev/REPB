@@ -4,10 +4,10 @@
 var bcrypt=require('bcrypt-nodejs');
 
 //modelos
-var User=require('../models/user.model');
+var User=require('../../models/u/user.model');
 
 //servicio jwt
-var jwt=require('../services/jwt');
+var jwt=require('../../services/j/jwt');
 
 //acciones
 function pruebas(req,res){
@@ -90,7 +90,7 @@ function login(req,res){
 	User.findOne({surname:surname,},(err,user)=>{
 		if(err){
 			res.status(500).send({message:'Error al comprobar el usuario'})
-			console.log('Error al comprobar el usuario');
+			//console.log('Error al comprobar el usuario');
 		}else{
 			if(user){
 				//cifrar la contraseña
@@ -112,12 +112,12 @@ function login(req,res){
 							//console.log(sucursal);
 							if (user.accesoEmpresa.indexOf(empresa) === -1) {
 								res.status(404).send({message:'No tiene acceso a la empresa ' + empresa });
-								console.log('No tiene acceso empresa ' + empresa);
+								//console.log('No tiene acceso empresa ' + empresa);
 							} else if (user.accesoEmpresa.indexOf(empresa) > -1) {
 								//Verificamos si tiene acceso a la sucursal
 								if (user.accesoSucursal.indexOf(sucursal) === -1) {
 									res.status(404).send({message:'No tiene acceso a la sucursal ' + sucursal });
-									console.log('No tiene acceso sucursal ' + sucursal);
+									//console.log('No tiene acceso sucursal ' + sucursal);
 								} else if (user.accesoSucursal.indexOf(sucursal) > -1) {
 									res.status(200).send({user});							
 									console.log('shalom');
@@ -126,13 +126,13 @@ function login(req,res){
 						}
 					}else{
 						res.status(404).send({message:'El password es incorrecto'});
-						console.log('El password es incorrecto');
+						//console.log('El password es incorrecto');
 					}
 				});
 
 			}else{
 				res.status(404).send({message:'El usuario no se encuentra registrado'});
-				console.log('El usuario no se encuentra registrado');
+				//console.log('El usuario no se encuentra registrado');
 			}
 		}
 	})

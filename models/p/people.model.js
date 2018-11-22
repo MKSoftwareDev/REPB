@@ -1,4 +1,5 @@
 'use stric'
+
 var mongoose = require('mongoose');
 var peopleSchema = new mongoose.Schema({
     people:{

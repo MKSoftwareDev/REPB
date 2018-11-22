@@ -1,6 +1,6 @@
 'use strict'
 //models
-var Mensaje = require('../models/mensaje.model');
+var Mensaje = require('../../models/m/mensaje.model');
 
 // add
 // upd

@@ -3,8 +3,8 @@
 var express=require('express');
 var api=express.Router();
 //Controlador
-var md_auth=require('../middlewares/authenticate');
-var sucursalCtlr=require('../controllers/sucursal.controller');
+var md_auth=require('../../middlewares/a/authenticate');
+var sucursalCtlr=require('../../controllers/s/sucursal.controller');
 
 // Rutas
 api.post  ('/sucursal/new',sucursalCtlr.sucursal_new_post);     

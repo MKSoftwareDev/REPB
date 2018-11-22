@@ -1,9 +1,10 @@
 'use strict'
+
 var express=require('express');
 var api=express.Router();
 //Controlador
-var md_auth=require('../middlewares/authenticate');
-var peopleCtlr=require('../controllers/people.controller');
+var md_auth=require('../../middlewares/a/authenticate');
+var peopleCtlr=require('../../controllers/p/people.controller');
 
 // Rutas
 api.post ('/people/new',peopleCtlr.people_new);

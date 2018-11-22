@@ -1,3 +1,5 @@
+'use strict'
+
 var log = {
     info: function (info) { 
         console.log('Info: ' + info);

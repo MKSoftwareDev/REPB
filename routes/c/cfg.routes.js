@@ -3,8 +3,8 @@ var express=require('express');
 var api=express.Router();
 
 //controlador
-var md_auth =require('../middlewares/authenticate');
-var cgfCtlr =require('../controllers/cfg.controller');
+var md_auth =require('../../middlewares/a/authenticate');
+var cgfCtlr =require('../../controllers/c/cfg.controller');
 
 
 // Rutas

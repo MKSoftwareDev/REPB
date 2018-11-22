@@ -1,6 +1,6 @@
 'use strict'
 //models
-var Sucursal = require('../models/sucursal.model');
+var Sucursal = require('../../models/s/sucursal.model');
 
 //insertar
 function sucursal_new_post (req,res){
