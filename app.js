@@ -7,12 +7,12 @@ var path = require('path');
 
 // Cargar rutas
 //app.use('/',express.static('cliente',{redirect:false}));
-var user_routes=require('./routes/u/user.routes');
-var bill_routes=require('./routes/b/bill.routes');
-var empresa_routes=require('./routes/e/empresa.routes');
-var sucursal_routes=require('./routes/s/sucursal.routes');
-var cfg_routes=require('./routes/c/cfg.routes');
-var people_routes=require('./routes/p/people.routes');
+var user_routes=require('./_routes/u/user.routes');
+var bill_routes=require('./_routes/b/bill.routes');
+var empresa_routes=require('./_routes/e/empresa.routes');
+var sucursal_routes=require('./_routes/s/sucursal.routes');
+var cfg_routes=require('./_routes/c/cfg.routes');
+var people_routes=require('./_routes/p/people.routes');
 
 
 
@@ -51,6 +51,7 @@ app.use(function(req, res, next) {
 
 const mkappuse='/bkd';
 app.use('/',express.static('cliente',{redirect:false}));
+
 app.use(mkappuse,user_routes);
 app.use(mkappuse,bill_routes);
 app.use(mkappuse,empresa_routes);
