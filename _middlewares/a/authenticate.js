@@ -5,8 +5,9 @@ var moment = require('moment');
 var secret='MKSoftwareDevelopers2018@'
 
 exports.ensureAuth=function(req,res,next){
+	console.log(req.headers);
 	if(!req.headers.authorization){
-		return res.status(403).send({message:'la peticion no tiene cabecera de autenticación'});
+		return res.status(403).send({message:'la peticion no tiene cabecera de autenticaciónnnn'});
 	}
 
 	var token=req.headers.authorization.replace(/['"]+/g,'');

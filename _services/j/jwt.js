@@ -3,6 +3,7 @@
 var jwt    =require('jwt-simple');
 var moment    =require('moment');
 var secret    ='MKSoftwareDevelopers2018@'
+//var secret    ='MKSoftwareDevelopers2018@'
 
 exports.createToken = function(user){
 	var payload={

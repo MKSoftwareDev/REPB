@@ -14,8 +14,6 @@ var sucursal_routes=require('./_routes/s/sucursal.routes');
 var cfg_routes=require('./_routes/c/cfg.routes');
 var people_routes=require('./_routes/p/people.routes');
 
-
-
 // middleware de body-parse
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());

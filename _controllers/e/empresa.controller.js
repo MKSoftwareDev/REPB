@@ -11,14 +11,20 @@ function empresa_new(req,res){
     var params=req.body;
     var mkIdioma="esp";
     console.log(req.body);
-    console.log(params);
+    //console.log(params);
     //
      if (params.clave && params.nombre){
          //asignamos las variables
          empresa.clave=params.clave;
          empresa.nombre=params.nombre;
          empresa.rfc=params.rfc;
-         console.log(empresa);
+         empresa.grupo=params.grupo;
+         empresa.estatus=params.estatus;
+         empresa.fechaAlta=params.fechaAlta;
+         empresa.seBorra=params.seBorra;
+         empresa.cveUsuarioAlta=params.cveUsuarioAlta;
+         
+         //console.log(empresa);
          empresa.save((err,number) => {
              if (err){
                  console.log(err);
@@ -67,8 +73,7 @@ function empresa_edit (req,res){
                                            rfc:params.rfc,
                                            grupo:params.grupo,
                                            estatus:params.estatus,
-                                           seBorra:params.seBorra,
-                                           fechaAlta:params.fechaAlta,
+                                           seBorra:params.seBorra,                                          
                                            domicilio:params.domicilio,
                                            telefono:params.telefono
 									}},{ upsert:true, new : true }, (err,empresaUpt) => {
@@ -104,7 +109,6 @@ function empresa_list (req,res){
         }
     });
 }
-
 //	Borrar
 function empresa_delete (req,res){
 	var empresaId=req.params.id;
@@ -135,9 +139,15 @@ function empresa_uno (req,res){
                 res.status(500).send({messege:err.messege});
             } else {
                 if (!empresa){
+
                     res.status(404).send({messge:'No se encontro el registro'});
                 } else {
-                    res.status(200).send({empresa})
+                    //if ( empresa.hasOwnProperty( seBorra ) || ( empresa.seBorra !== true ) ) {
+                      //     empresa.seBorra=false;
+                      console.log(JSON.stringify(empresa));
+                            res.status(200).send({empresa})
+                      // };
+                    
                 }
             }
         });

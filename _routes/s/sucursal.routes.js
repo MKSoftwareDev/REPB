@@ -6,11 +6,12 @@ var api=express.Router();
 var md_auth=require('../../_middlewares/a/authenticate');
 var sucursalCtlr=require('../../_controllers/s/sucursal.controller');
 
+
 // Rutas
-api.post  ('/sucursal/new',sucursalCtlr.sucursal_new_post);     
-//api.delete('/sucursal/del/:id', md_auth.ensureAuth,sucursalCtlr.sucursal_del_delete);   
-//api.put   ('/sucursal/upt/:id', md_auth.ensureAuth,sucursalCtlr.sucursal_upt_put);      
-api.get   ('/sucursal/:id',sucursalCtlr.sucursal_det);
-api.get   ('/sucursal',    sucursalCtlr.sucursal_lst);
+api.post  ('/sucursal/new', sucursalCtlr.sucursal_new);   
+api.put   ('/sucursal/:id', sucursalCtlr.sucursal_edit);    
+api.get   ('/sucursal'    , sucursalCtlr.sucursal_list);
+api.delete('/sucursal/:id', sucursalCtlr.sucursal_delete);     
+api.get   ('/sucursal/:id', sucursalCtlr.sucursal_uno);
 
 module.exports = api;

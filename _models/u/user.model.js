@@ -7,21 +7,25 @@ var userSchema = new mongoose.Schema({
 	paterno:	{type: String,	required: true},
 	materno:	String,
 	rfc:		{type: String,	required: true, min:9, max:13},
-	curp:		{type: String,	required: true, min:9, max:13},
-	email:		{type: String,	required: true},
-	password: {type: String,	required: true},
-	role: String,
+	curp:		{type: String,	required: true, min:9, max:13},	
+	password: {type: String, required: true},
+	grupo: String,
+	subgrupo: String,
 	imagen: String,
 	domicilio: [{
-	tipo: String,
-	direccion: String,
-	numext: String,
-	numint: String,
-	cp: Number,
-	colonia: String,
-	municipio: String,
-	delegacion: String,
-	estado: String
+		tipo: String,
+		direccion: String,
+		numext: String,
+		numint: String,
+		cp: Number,
+		colonia: String,
+		municipio: String,
+		delegacion: String,
+		estado: String
+	}],
+	correo:		[{
+		tipo: String,
+		email: String
 	}],
 	telefono:[{
 		tipo: String,
@@ -32,7 +36,7 @@ var userSchema = new mongoose.Schema({
 		empresa: String,
 		sucursal: String,
 		almacen: String,
-		cta: String
+		centroc: String
 	},
 	grupo: {type: String, default: 'Developers'},
 	departamento: {type: String, default: 'Ventas'},

@@ -4,11 +4,12 @@ var mongoose = require('mongoose');
 var empresaSchema = new mongoose.Schema({
 	clave:	{type: String,	required: true, unique: true},
 	nombre:	{type: String,	required: true},
-	rfc:	{type: String,	required: true, min:9, max:13},
-	grupo:  {type: String, default: 'Principal'},
-	seBorra: Boolean,
-	estatus: {type: String, enum: ['ALTA','BAJA','BLOQUEADO','SUSPENDIDO'] },
+	rfc:	{type: String, default: 'XAXX010101000',	required: true, min:9, max:13},
+	grupo:  {type: String, default: 'PENDIENTE'},
+	seBorra: {type: Boolean, default: false},
+	estatus: {type: String, enum: ['ALTA','BAJA','BLOQUEADO','SUSPENDIDO','PENDIENTE'] },
 	fechaAlta: { type: Date, default: Date.now },
+	cveUsuarioAlta : {type: String},
 	domicilio: [{
 				tipo: String,
 				direccion: String,
@@ -24,10 +25,11 @@ var empresaSchema = new mongoose.Schema({
 				tipo: String,
 				numero: String,
 				extension: String
-	}],
-	
+	}],	
 
 });
+
+
 var Empresa = mongoose.model('empresas', empresaSchema);
 module.exports=Empresa;
 
