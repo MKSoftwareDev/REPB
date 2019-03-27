@@ -1,6 +1,7 @@
 /*
  * Script que se encarga de poblar la base de datos  
  * 
+mongo "C:\GitHub\MKSoftwareDev\REPB\_database\empresa.insert.js"
  */
 
  //var databaseConfig = require 'databaseConfig';
