@@ -9,8 +9,7 @@ var userSchema = new mongoose.Schema({
 	rfc:		{type: String,	required: true, min:9, max:13},
 	curp:		{type: String,	required: true, min:9, max:13},	
 	password: {type: String, required: true},
-	grupo: String,
-	subgrupo: String,
+	confirmPassword : {type: String,	required: true},
 	imagen: String,
 	domicilio: [{
 		tipo: String,
@@ -39,13 +38,20 @@ var userSchema = new mongoose.Schema({
 		centroc: String
 	},
 	grupo: {type: String, default: 'Developers'},
+	subgrupo: String,
 	departamento: {type: String, default: 'Ventas'},
 	accesoEmpresa: [{type: String}],
-	accesoSucursal: [{type: String}]
+	accesoSucursal: [{type: String}],
+	estatus: {type: String,	required: true, enum: ['ALTA','BAJA','BLOQUEADO','SUSPENDIDO','PENDIENTE']},
+	fechaAlta: { type: Date, default: Date.now },
+	usuarioAlta : {type: String},
+	fechaCambio: { type: Date, default: Date.now },
+	usuarioCambio : {type: String}
 
 });
 var User = mongoose.model('users', userSchema);
 module.exports=User;
+
 
 
 

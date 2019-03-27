@@ -24,12 +24,12 @@ function saveUser(req,res){
 	if ( params.nombre && params.surname ){
 		user.surname=params.surname;
 		user.nombre=params.nombre;
-		//user.paterno=params.paterno;
-		//user.materno=params.materno;
+		user.paterno=params.paterno;
+		user.materno=params.materno;
 		user.rfc=params.rfc;
-		//user.curp=params.curp;		
+		user.curp=params.curp;		
 		//user.email=params.email;
-		//user.password=params.password;
+		user.password=params.password;
 		//user.role='Admin';
 		//user.imagen=null;
 		User.findOne({surname:user.surname.toLowerCase()},(err,findUser)=>{

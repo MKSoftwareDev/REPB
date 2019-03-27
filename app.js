@@ -58,7 +58,7 @@ app.use(mkappuse,cfg_routes);
 app.use(mkappuse,people_routes);
 
 app.get('*',function(req,res,next){
-  res.sendFile(path.resolve('cliente/index.html')); estas
+  res.sendFile(path.resolve('cliente/index.html')); //estas
 });
 
 module.exports = app;
